@@ -1,5 +1,7 @@
 package com.naofeleal.MotusAPI.Application.Presenters;
 
-public class ValidateWordPresenter {
+import com.naofeleal.MotusAPI.Application.IPresenters.IValidateWordPresenter;
+
+public class ValidateWordPresenter implements IValidateWordPresenter {
     
 }

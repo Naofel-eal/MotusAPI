@@ -13,7 +13,9 @@ public class SpyWordRepository implements IWordRepository {
     @Override
     public List<Word> fetchRandomWords(int numberOfWords) {
         isGenerateRandomWordsCalled = true;
-        return new ArrayList<Word>();
+        List<Word> words = new ArrayList<Word>();
+        words.add(new Word("word", "fr-FR"));
+        return words;
     }
 
     @Override

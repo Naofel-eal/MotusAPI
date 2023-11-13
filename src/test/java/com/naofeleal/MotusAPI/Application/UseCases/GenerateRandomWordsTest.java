@@ -19,6 +19,7 @@ public class GenerateRandomWordsTest {
     public void setUp() {
         OutputWordMapper outputWordMapper = Mappers.getMapper(OutputWordMapper.class);
         _presenter = new GenerateRandomWordsPresenter(outputWordMapper);
+
     }
 
     @Test()
@@ -34,7 +35,16 @@ public class GenerateRandomWordsTest {
         Assertions.assertEquals(spyWordRepository.isGenerateRandomWordsCalled, true);
     }
 
-    public void it_should_fetch_words() {
-        // TODO
+    @Test()
+    public void it_should_give_words_to_presenter() {
+        // Arrange
+        SpyWordPresenter spyWordPresenter = new SpyWordPresenter();
+        _generateRandomWords = new GenerateRandomWords(new SpyWordRepository(), spyWordPresenter);
+
+        // Act
+        _generateRandomWords.execute(5);
+
+        // Assert
+        Assertions.assertEquals(spyWordPresenter.isPresenterCalled, true);
     }
 }
