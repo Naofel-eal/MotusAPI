@@ -4,6 +4,6 @@ import java.util.List;
 
 import com.naofeleal.MotusAPI.Domain.Entities.Word;
 
-public interface IGenerateRandomWordsPresenter {
+public interface IFetchRandomWordsPresenter {
     void present(List<Word> words);
 }

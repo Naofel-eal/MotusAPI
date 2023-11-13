@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.naofeleal.MotusAPI.Application.IPresenters.IGenerateRandomWordsPresenter;
+import com.naofeleal.MotusAPI.Application.IPresenters.IFetchRandomWordsPresenter;
 import com.naofeleal.MotusAPI.Application.IRepositories.IWordRepository;
-import com.naofeleal.MotusAPI.Application.IUseCases.IGenerateRandomWords;
+import com.naofeleal.MotusAPI.Application.IUseCases.IFetchRandomWords;
 import com.naofeleal.MotusAPI.Domain.Entities.Word;
 
 @Service
-public class GenerateRandomWords implements IGenerateRandomWords {
+public class FetchRandomWords implements IFetchRandomWords {
     private IWordRepository wordRepository;
-    private IGenerateRandomWordsPresenter presenter;
+    private IFetchRandomWordsPresenter presenter;
 
-    public GenerateRandomWords(IWordRepository wordRepository, IGenerateRandomWordsPresenter generateRandomWordsPresenter) {
+    public FetchRandomWords(IWordRepository wordRepository, IFetchRandomWordsPresenter generateRandomWordsPresenter) {
         this.wordRepository = wordRepository;
         this.presenter = generateRandomWordsPresenter;
     }

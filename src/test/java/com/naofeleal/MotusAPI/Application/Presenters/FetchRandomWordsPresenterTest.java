@@ -15,14 +15,14 @@ import com.naofeleal.MotusAPI.Domain.Entities.Word;
 import com.naofeleal.MotusAPI.Interfaces.Web.DTOs.OutputWordDTO;
 
 @SpringBootTest(classes = OutputWordMapperImpl.class)
-public class GenerateRandomWordsPresenterTest {
-    private GenerateRandomWordsPresenter _presenter;
+public class FetchRandomWordsPresenterTest {
+    private FetchRandomWordsPresenter _presenter;
     private OutputWordMapper _outputWordMapper;
 
     @BeforeEach()
     public void setUp() {
         _outputWordMapper = Mappers.getMapper(OutputWordMapper.class);
-        _presenter = new GenerateRandomWordsPresenter(_outputWordMapper);
+        _presenter = new FetchRandomWordsPresenter(_outputWordMapper);
     }
 
     @Test
