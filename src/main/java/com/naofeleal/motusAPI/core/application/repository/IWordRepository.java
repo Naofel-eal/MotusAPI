@@ -5,7 +5,7 @@ import com.naofeleal.motusAPI.core.domain.model.Word;
 
 import java.util.List;
 
-public interface WordRepository {
+public interface IWordRepository {
     public List<Word> fetchWords(Language language, short nomberOfWords);
 
     public Boolean validateWord(Word word, Language language);

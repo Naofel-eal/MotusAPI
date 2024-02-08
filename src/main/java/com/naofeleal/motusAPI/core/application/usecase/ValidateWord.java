@@ -1,4 +1,19 @@
 package com.naofeleal.motusAPI.core.application.usecase;
 
-public class ValidateWord {
+import com.naofeleal.motusAPI.core.application.repository.IWordRepository;
+import com.naofeleal.motusAPI.core.application.usecase.inteface.IValidateWord;
+import com.naofeleal.motusAPI.core.domain.model.Language;
+import com.naofeleal.motusAPI.core.domain.model.Word;
+
+public class ValidateWord implements IValidateWord {
+    private IWordRepository _repository;
+
+    public ValidateWord(IWordRepository repository) {
+        this._repository = repository;
+    }
+
+    @Override
+    public boolean execute(Word word, Language language) {
+        return _repository.validateWord(word, language);
+    }
 }
