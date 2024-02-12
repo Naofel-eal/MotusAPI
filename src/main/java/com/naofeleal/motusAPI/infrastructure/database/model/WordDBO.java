@@ -9,8 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import com.naofeleal.motusAPI.core.domain.model.Language;
-
+import com.naofeleal.motusAPI.infrastructure.database.model.LanguageDBO;
 
 @Entity
 @Table(name="word")

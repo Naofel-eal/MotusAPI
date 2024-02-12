@@ -9,8 +9,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.CascadeType;
+import java.util.List;
 
-import com.naofeleal.motusAPI.core.domain.model.WordDBO;
+import com.naofeleal.motusAPI.infrastructure.database.model.WordDBO;
 
 @Entity
 @Table(name="language")
