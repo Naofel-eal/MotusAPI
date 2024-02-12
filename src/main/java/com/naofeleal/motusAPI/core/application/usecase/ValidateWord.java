@@ -5,6 +5,7 @@ import com.naofeleal.motusAPI.core.application.usecase.inteface.IValidateWord;
 import com.naofeleal.motusAPI.core.domain.model.Language;
 import com.naofeleal.motusAPI.core.domain.model.Word;
 
+@Service
 public class ValidateWord implements IValidateWord {
     private IWordRepository _repository;
 

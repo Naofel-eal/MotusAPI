@@ -7,6 +7,7 @@ import com.naofeleal.motusAPI.core.domain.model.Word;
 
 import java.util.List;
 
+@Service
 public class FetchWord implements IFetchWord {
     private final IWordRepository _repository;
     public FetchWord(IWordRepository repository) {
