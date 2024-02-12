@@ -1,5 +1,17 @@
 package com.naofeleal.motusAPI.infrastructure.database.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
+
+import com.naofeleal.motusAPI.core.domain.model.WordDBO;
+
 @Entity
 @Table(name="language")
 public class LanguageDBO {

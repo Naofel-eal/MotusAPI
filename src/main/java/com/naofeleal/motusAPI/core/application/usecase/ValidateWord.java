@@ -5,6 +5,8 @@ import com.naofeleal.motusAPI.core.application.usecase.inteface.IValidateWord;
 import com.naofeleal.motusAPI.core.domain.model.Language;
 import com.naofeleal.motusAPI.core.domain.model.Word;
 
+import org.springframework.stereotype.Service;
+
 @Service
 public class ValidateWord implements IValidateWord {
     private IWordRepository _repository;

@@ -6,6 +6,7 @@ import com.naofeleal.motusAPI.core.domain.model.Language;
 import com.naofeleal.motusAPI.core.domain.model.Word;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class FetchWord implements IFetchWord {
