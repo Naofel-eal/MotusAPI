@@ -6,6 +6,7 @@ import com.naofeleal.motusAPI.core.domain.model.Word;
 
 import java.util.List;
 
+@Repository
 public class DBWordAdapter implements IWordRepository {
     @Override
     public List<Word> fetchWords(Language language, short nomberOfWords) {

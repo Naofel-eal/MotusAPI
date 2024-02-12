@@ -1,4 +1,5 @@
 package com.naofeleal.motusAPI.infrastructure.database.repository;
 
-public interface IDBWordRepository {
+@Repository
+public interface IDBWordRepository extends JpaRepository<WordDBO, Long> {
 }
