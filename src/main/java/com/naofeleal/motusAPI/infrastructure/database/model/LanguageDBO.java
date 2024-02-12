@@ -14,8 +14,9 @@ public class LanguageDBO {
     @OneToMany(mappedBy="language", cascade=CascadeType.ALL, orphanRemoval=true)
     public List<WordDBO> words;
 
-    public LanguageDBO(Long id, String isoCode) {
+    public LanguageDBO(Long id, String isoCode, List<WordDBO> words) {
         this.id = id;
         this.isoCode = isoCode;
+        this.words = words;
     }
 }

@@ -15,9 +15,9 @@ public class WordDBO {
 
     @ManyToOne
     @JoinColumn(name="word_language_id", nullable=false)
-    public Language language;
+    public LanguageDBO language;
     
-    public WordDBO(Long id, String value, Language language) {
+    public WordDBO(Long id, String value, LanguageDBO language) {
         this.id = id;
         this.value = value;
         this.language = language;
