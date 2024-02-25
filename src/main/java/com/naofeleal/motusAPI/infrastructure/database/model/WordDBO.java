@@ -31,4 +31,10 @@ public class WordDBO {
         this.value = value;
         this.language = language;
     }
+
+    public WordDBO() {
+        this.id = null;
+        this.value = null;
+        this.language = null;
+    }
 }
