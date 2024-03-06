@@ -60,7 +60,6 @@ class DBWordAdapterTest {
 
         // Act
         List<Word> result = _dbWordAdapter.fetchWords(language, (short) 1);
-
         // Assert
         Assertions.assertEquals(expectedWords, result);
         Mockito.verify(_dbWordMapper).toDomainModels(wordDBOs);

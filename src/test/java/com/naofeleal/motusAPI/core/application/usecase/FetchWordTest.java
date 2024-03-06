@@ -20,7 +20,7 @@ public class FetchWordTest {
     private IWordRepository _repository;
 
     @InjectMocks
-    private FetchWord _fetchWordUseCase;
+    private FetchWordUseCase _fetchWordUseCase;
 
     @Test
     public void executeShouldCallTheReository() {

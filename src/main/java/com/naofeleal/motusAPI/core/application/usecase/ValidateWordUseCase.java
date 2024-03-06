@@ -1,17 +1,17 @@
 package com.naofeleal.motusAPI.core.application.usecase;
 
 import com.naofeleal.motusAPI.core.application.repository.IWordRepository;
-import com.naofeleal.motusAPI.core.application.usecase.inteface.IValidateWord;
+import com.naofeleal.motusAPI.core.application.usecase.interfaces.IValidateWordUseCase;
 import com.naofeleal.motusAPI.core.domain.model.Language;
 import com.naofeleal.motusAPI.core.domain.model.Word;
 
 import org.springframework.stereotype.Service;
 
 @Service
-public class ValidateWord implements IValidateWord {
+public class ValidateWordUseCase implements IValidateWordUseCase {
     private IWordRepository _repository;
 
-    public ValidateWord(IWordRepository repository) {
+    public ValidateWordUseCase(IWordRepository repository) {
         this._repository = repository;
     }
 

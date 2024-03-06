@@ -11,15 +11,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
 class ValidateWordTest {
     @Mock
     private IWordRepository _repository;
 
     @InjectMocks
-    private ValidateWord _validateWordUseCase;
+    private ValidateWordUseCase _validateWordUseCase;
 
     @Test
     public void shouldCallTheRepository() {
