@@ -2,11 +2,12 @@ package com.naofeleal.motusAPI.infrastructure.client.presenter;
 
 import com.naofeleal.motusAPI.core.domain.model.Word;
 import com.naofeleal.motusAPI.infrastructure.client.presenter.interfaces.IFetchWordPresenter;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class FetchWordPresenter implements IFetchWordPresenter {
@@ -14,13 +15,10 @@ public class FetchWordPresenter implements IFetchWordPresenter {
     public FetchWordPresenter() {}
 
     @Override
-    public JSONObject present(List<Word> words) {
-        JSONObject result = new JSONObject();
-        JSONArray wordJSONArray = new JSONArray();
-
-        for (Word word : words) wordJSONArray.put(word.value);
-        result.put("words", wordJSONArray);
-
-        return result;
+    public Map<String, Object> present(List<Word> words) {
+        Map<String, Object> result = new HashMap<>();
+        List<String> wordValues = words.stream().map(word -> word.value).collect(Collectors.toList());
+        result.put("words", wordValues);
+        return result; 
     }
 }

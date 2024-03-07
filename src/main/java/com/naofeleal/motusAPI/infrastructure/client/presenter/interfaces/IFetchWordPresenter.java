@@ -1,10 +1,10 @@
 package com.naofeleal.motusAPI.infrastructure.client.presenter.interfaces;
 
 import com.naofeleal.motusAPI.core.domain.model.Word;
-import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IFetchWordPresenter {
-    public JSONObject present(List<Word> words);
+    public Map<String, Object> present(List<Word> words);
 }
