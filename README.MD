@@ -1,5 +1,12 @@
 # MotusAPI
-[![Motus API CI](https://github.com/Naofel-eal/MotusAPI/actions/workflows/CI_pipeline.yml/badge.svg)](https://github.com/Naofel-eal/MotusAPI/actions/workflows/CI_pipeline.yml)
+
+<div align="center">
+    <img src="https://img.shields.io/github/contributors/naofel-eal/MotusAPI.svg?style=for-the-badge" alt="Contributors">
+    <img src="https://img.shields.io/github/forks/naofel-eal/MotusAPI.svg?style=for-the-badge" alt="Forks">
+    <img src="https://img.shields.io/github/stars/naofel-eal/MotusAPI.svg?style=for-the-badge" alt="Stars">
+    <img src="https://img.shields.io/github/issues/naofel-eal/MotusAPI.svg?style=for-the-badge" alt="Issues">
+</div>
+
 ## Overview
 
 MotusAPI is a RESTful service designed to support the game of Motus by providing functionalities to fetch words based on language ISO codes and to validate words for given languages. This document outlines the available endpoints, their parameters, and possible responses.
