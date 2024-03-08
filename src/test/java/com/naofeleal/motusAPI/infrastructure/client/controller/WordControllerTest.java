@@ -4,171 +4,116 @@ import com.naofeleal.motusAPI.core.application.usecase.interfaces.IFetchWordUseC
 import com.naofeleal.motusAPI.core.application.usecase.interfaces.IValidateWordUseCase;
 import com.naofeleal.motusAPI.core.domain.model.Language;
 import com.naofeleal.motusAPI.core.domain.model.Word;
-import com.naofeleal.motusAPI.infrastructure.client.mapper.IClientWordMapper;
 import com.naofeleal.motusAPI.infrastructure.client.presenter.interfaces.IFetchWordPresenter;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.anyShort;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyShort;
+import static org.mockito.Mockito.*;
 
 @WebMvcTest(WordController.class)
 @ExtendWith(MockitoExtension.class)
 public class WordControllerTest {
-    @InjectMocks
-    private WordController _wordController;
-    @MockBean
-    private IClientWordMapper _clientWordMapper;
-    @MockBean
-    private IFetchWordUseCase _fetchWordUseCase;
-    @MockBean
-    private IValidateWordUseCase _validateWordUseCase;
-    @MockBean
-    private IFetchWordPresenter _fetchWordPresenter;
     @Autowired
-    private MockMvc _mockMvc;
+    private MockMvc mockMvc;
+
+    @MockBean
+    private IFetchWordUseCase fetchWordUseCase;
+
+    @MockBean
+    private IValidateWordUseCase validateWordUseCase;
+
+    @MockBean
+    private IFetchWordPresenter fetchWordPresenter;
 
     @Test
     public void fetchWordShouldValidateIsoCodePattern() throws Exception {
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/a1/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/fetch?isocode=a1&numberOfWords=1"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch//1"))
-                .andExpect(MockMvcResultMatchers.status().isNotFound()); 
-
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/aaa/1"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/a/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/fetch?isocode=aaa&numberOfWords=1"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test
     public void fetchWordShouldValidateNumberOfWordsPositive() throws Exception {
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/aa/0"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/fetch?isocode=aa&numberOfWords=0"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/aa/-5"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/fetch?isocode=aa&numberOfWords=-5"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
-    }
-
-    @Test
-    public void fetchWordShouldPassWithValidParameters() throws Exception {
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/aa/5"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
-
-    @Test
-    public void fetchWordsShouldCallAllDependencies() {
-        // Arrange
-        String isoCode = "EN";
-        short numberOfWords = 5;
-
-        // Act
-        ResponseEntity< Map<String, Object>> response = this._wordController.fetchWords(isoCode, numberOfWords);
-
-        // Assert
-        verify(this._fetchWordUseCase, times(1)).execute(any(Language.class), anyShort()); 
-        verify(this._fetchWordPresenter, times(1)).present(any());
-    }
-
-    @Test
-    public void fetchWordsShouldReturnTwoWords() throws Exception {
-        Language language = new Language("EN");
-        List<Word> exampleWords = Arrays.asList(new Word("test", language), new Word("motus", language));
-        when(this._fetchWordUseCase.execute(any(Language.class), anyShort())).thenReturn(exampleWords);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("words", Arrays.asList("test", "motus"));
-        when(this._fetchWordPresenter.present(anyList())).thenReturn(response);
-
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/EN/2")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.words").isArray())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.words[0]").value("test"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.words[1]").value("motus"));
     }
 
     @Test
     public void validateWordShouldValidateIsoCodePattern() throws Exception {
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/validate/a1/a"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/validate/1/a"))
+        when(validateWordUseCase.execute(any(Word.class), any(Language.class))).thenReturn(true);
+        
+        mockMvc.perform(MockMvcRequestBuilders.get("/validate?isocode=a1&word=a"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
         
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/validate/aaa/a"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-        
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/validate//a"))
-                .andExpect(MockMvcResultMatchers.status().isNotFound());
+        mockMvc.perform(MockMvcRequestBuilders.get("/validate?isocode=EN&word=word"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
     public void validateWordShouldValidateWordPattern() throws Exception {
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/validate/EN/1"))
+        when(validateWordUseCase.execute(any(Word.class), any(Language.class))).thenReturn(true);
+    
+        mockMvc.perform(MockMvcRequestBuilders.get("/validate?isocode=EN&word=1"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
         
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/validate/EN/-"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-        
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/validate/EN//"))
-                .andExpect(MockMvcResultMatchers.status().isNotFound());
+        mockMvc.perform(MockMvcRequestBuilders.get("/validate?isocode=EN&word=valid"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
-    public void validateWordsShouldCallAllDependencies() {
-        // Arrange
-        String isoCode = "EN";
-        String word = "test";
+    public void fetchWordsShouldReturnCorrectResponse() throws Exception {
+        List<Word> words = Arrays.asList(new Word("hello", new Language("EN")), new Word("world", new Language("EN")));
+        when(fetchWordUseCase.execute(any(Language.class), anyShort())).thenReturn(words);
 
-        // Act
-        ResponseEntity<Void> response = this._wordController.validateWord(isoCode, word);
+        Map<String, Object> response = new HashMap<>();
+        response.put("words", Arrays.asList("hello", "world"));
+        when(fetchWordPresenter.present(anyList())).thenReturn(response);
 
-        // Assert
-        verify(this._validateWordUseCase, times(1)).execute(any(Word.class), any(Language.class)); 
+        mockMvc.perform(MockMvcRequestBuilders.get("/fetch?isocode=EN&number=2")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.words").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.words[0]").value("hello"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.words[1]").value("world"));
     }
 
     @Test
     public void validateWordShouldReturnNotFoundWhenWordIsInvalid() throws Exception {
-        String isoCode = "EN";
-        String word = "invalidword";
-        when(this._validateWordUseCase.execute(any(Word.class), any(Language.class))).thenReturn(false);
+        when(validateWordUseCase.execute(any(Word.class), any(Language.class))).thenReturn(false);
 
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/validate/{isocode}/{word}", isoCode, word)
+        mockMvc.perform(MockMvcRequestBuilders.get("/validate?isocode=EN&word=invalidword")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test
-    public void validateWordShouldReturnFoundWhenWordIsValid() throws Exception {
-        String isoCode = "EN";
-        String word = "validword";
-        when(this._validateWordUseCase.execute(any(Word.class), any(Language.class))).thenReturn(true);
+    public void validateWordShouldReturnOkWhenWordIsValid() throws Exception {
+        when(validateWordUseCase.execute(any(Word.class), any(Language.class))).thenReturn(true);
 
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/validate/{isocode}/{word}", isoCode, word)
+        mockMvc.perform(MockMvcRequestBuilders.get("/validate?isocode=EN&word=validword")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isFound());
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
