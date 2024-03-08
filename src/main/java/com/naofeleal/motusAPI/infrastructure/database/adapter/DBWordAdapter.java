@@ -29,6 +29,6 @@ public class DBWordAdapter implements IWordRepository {
 
     @Override
     public Boolean validateWord(Word word, Language language) {
-        return null;
+        return _wordRepository.existsByLanguageIsoCodeAndValue(language.isoCode, word.value);
     }
 }

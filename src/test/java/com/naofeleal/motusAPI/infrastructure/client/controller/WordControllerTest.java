@@ -49,31 +49,31 @@ public class WordControllerTest {
 
     @Test
     public void fetchWordShouldValidateIsoCodePattern() throws Exception {
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch-words/a1/1"))
+        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/a1/1"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch-words//1"))
+        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch//1"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound()); 
 
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch-words/aaa/1"))
+        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/aaa/1"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch-words/a/1"))
+        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/a/1"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test
     public void fetchWordShouldValidateNumberOfWordsPositive() throws Exception {
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch-words/aa/0"))
+        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/aa/0"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch-words/aa/-5"))
+        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/aa/-5"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test
     public void fetchWordShouldPassWithValidParameters() throws Exception {
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch-words/aa/5"))
+        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/aa/5"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -101,7 +101,7 @@ public class WordControllerTest {
         response.put("words", Arrays.asList("test", "motus"));
         when(this._fetchWordPresenter.present(anyList())).thenReturn(response);
 
-        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch-words/EN/2")
+        this._mockMvc.perform(MockMvcRequestBuilders.get("/fetch/EN/2")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))

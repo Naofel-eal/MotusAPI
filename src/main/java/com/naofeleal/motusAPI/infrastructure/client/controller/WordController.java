@@ -1,21 +1,17 @@
 package com.naofeleal.motusAPI.infrastructure.client.controller;
 
-import com.naofeleal.motusAPI.infrastructure.client.mapper.IClientWordMapper;
 import com.naofeleal.motusAPI.core.application.usecase.interfaces.IFetchWordUseCase;
 import com.naofeleal.motusAPI.core.application.usecase.interfaces.IValidateWordUseCase;
 import com.naofeleal.motusAPI.core.domain.model.Language;
 import com.naofeleal.motusAPI.core.domain.model.Word;
 import com.naofeleal.motusAPI.infrastructure.client.presenter.interfaces.IFetchWordPresenter;
-import com.naofeleal.motusAPI.infrastructure.client.presenter.interfaces.IValidateWordPresenter;
 
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +36,7 @@ public class WordController {
         this._fetchWordPresenter = fetchWordPresenter;
     }
 
-    @GetMapping(path = "/fetch-words/{isocode}/{numberOfWords}")
+    @GetMapping(path = "/fetch/{isocode}/{numberOfWords}")
     public ResponseEntity<Map<String, Object>> fetchWords(
             @PathVariable(value = "isocode") 
             @Pattern(regexp = "^[A-Za-z]{2}$", message = "Language isocode should contains 2 letters.") 
