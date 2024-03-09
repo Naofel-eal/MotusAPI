@@ -13,8 +13,7 @@ MotusAPI is a RESTful service designed to support the game of Motus by providing
 
 ## Implementation
 
-This API is implemented following the Clean Architecture principles to ensure that the system is maintainable, testable, and scalable. This architecture separates concerns into independent layers, allowing for flexibility and the easy addition of new features in the future.
-
+This API is implemented following the Clean Architecture principles to ensure that the system is maintainable, testable, and scalable. This architecture separates concerns into independent layers, allowing for flexibility and the easy addition of new features in the future. Additionally, the development of this API employed Test-Driven Development (TDD) practices to ensure high-quality code and facilitate future maintenance and scalability. By prioritizing tests before writing the actual code, we were able to create a more reliable and robust system from the outset.
 
 ## API Endpoints
 
