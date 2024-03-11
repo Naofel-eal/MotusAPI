@@ -66,8 +66,8 @@ public class WordController {
         @Pattern(regexp = "[A-Za-z]+", message = "The Word should only contains letters.")
         final String word
     ) {
-        Language language = new Language(isocode);
-        Word testeWord = new Word(word, language);
+        Language language = new Language(isocode.toUpperCase());
+        Word testeWord = new Word(word.toLowerCase(), language);
         boolean isWordValid = this._validateWordUseCase.execute(testeWord, language);
         if (!isWordValid) {
             throw new ResourceNotFoundException();
