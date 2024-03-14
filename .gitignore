@@ -34,3 +34,6 @@ build/
 
 ### Vault ###
 src/main/resources/.vault
+
+### Database ###
+src/main/resources/database
