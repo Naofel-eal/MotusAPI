@@ -9,7 +9,8 @@
 
 ## Overview
 
-MotusAPI is a RESTful service designed to support the game of Motus by providing functionalities to fetch words based on language ISO codes and to validate words for given languages. This document outlines the available endpoints, their parameters, and possible responses.
+MotusAPI is a RESTful service designed to support the game of Motus by providing functionalities to fetch words based on language ISO codes and to validate words for given languages. This document outlines the available endpoints, their parameters, and possible responses.  
+You can find the frontend repository here: [MotusIHM](https://github.com/Naofel-eal/MotusIHM)
 
 ## Implementation
 
@@ -74,5 +75,3 @@ The API will be accessible at `http://localhost:8080`.
 ## Contributing
 
 Contributions to MotusAPI are welcome. Please feel free to fork the repository, make your changes, and submit a pull request.
-
-
