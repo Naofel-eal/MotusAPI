@@ -2,7 +2,7 @@ FROM maven:3.9.5-eclipse-temurin-21-alpine AS builder
 
 WORKDIR /app
 COPY . .
-RUN mvn package -DskipTests
+RUN mvn package
 
 FROM openjdk:21-jdk
 
