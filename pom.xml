@@ -102,7 +102,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${artifactId}</finalName>
+		<finalName>motus</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
