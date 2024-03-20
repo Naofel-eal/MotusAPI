@@ -6,7 +6,7 @@ RUN mvn package
 
 FROM openjdk:21-jdk
 
-COPY --from=builder /app/target/MotusAPI-1.0.0.jar /app.jar
+COPY --from=builder /app/target/motus.jar /app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app.jar"]
