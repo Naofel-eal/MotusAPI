@@ -60,6 +60,22 @@ Validates whether a given word exists for the specified language.
 | 400         | Bad Request (invalid parameters).|
 | 404         | Not Found (word not valid).      |
 
+### Get Languages
+
+Retrieves a list of available languages for the game.
+
+#### Request
+
+`GET /languages`
+
+No parameters.  
+
+#### Response
+
+| Status Code | Description                            |
+|-------------|----------------------------------------|
+| 200         | Successful retrieval of words.         |
+
 ## Getting Started
 
 To use MotusAPI, you will need to have an environment capable of running Spring Boot applications. Ensure you have Java and Maven installed, then follow these steps to run the application:
